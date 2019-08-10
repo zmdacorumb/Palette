@@ -1,0 +1,38 @@
+
+input[type="range"]{/*修改本體*/
+    
+    -webkit-appearance:none;
+    width:320px;
+    height: 10px;
+    outline: none; /*無外框線*/
+    border-radius: 5px;
+    /* background: none; */
+}
+input[type="range"]::-webkit-slider-thumb{/*修改拉把*/
+    -webkit-appearance:none;/* 去除系統預設 */
+    width: 35px;
+    height: 25px;
+    background: #0080ff;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#LookR,#LookG,#LookB{
+    width:55px; 
+    height: 35px;
+    border-radius: 18px;
+    color: #fff;
+}
+input[type="range"]::-webkit-slider-thumb:hover{/*修改拉把*/
+    -webkit-appearance:none;/* 去除系統預設 */
+    width: 30px;
+    height: 30px;
+    background: #ff0000;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+

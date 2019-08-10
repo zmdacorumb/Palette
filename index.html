@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/mycss.css">
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <div class="row  position-relative d-flex flex-column justify-content-center align-items-center ">
+            <div id="col" class="col-10 col-md-8 col-xl-5 ">
+                <p id="fontcolor"></p>
+            </div>
+            <div class=" col-10 col-md-8 col-xl-5 mt-5 d-inline ">
+                <p>
+                    <button class="btn btn-danger " onclick="getnum(1)">R</button>
+                    <input class="col-9 col-md-9 ml-2 mx-md-2" id="ran1" type="range" min="0" max="255" oninput="makecol(this.value)">
+                    <button id="LookR" type="button" class="btn btn-outline-danger d-none d-md-inline-block " >1</button>  
+                </p>
+                <p>
+                    <button class="btn btn-success " onclick="getnum(2)">G</button>
+                    <input class="col-9 col-md-9 ml-2 mx-md-2" id="ran2" type="range" min="0" max="255" oninput="makecol(this.value)">
+                    <button id="LookG" type="button" class="btn btn-outline-success d-none d-md-inline-block"  >1</button>
+                </p>
+                <p>
+                    <button class="btn btn-info " onclick="getnum(3)">B</button>
+                    <input class="col-9 col-md-9 ml-2 mx-md-2" id="ran3" type="range" min="0" max="255" oninput="makecol(this.value)">
+                    <button id="LookB" type="button" class="btn btn-outline-info d-none d-md-inline-block">1</button>
+                </p>
+                <button class="btn btn-warning" onmousedown="notplus()" onmouseup="stoplus()"
+                    onmouseout="stoplus()">❮</button>
+                <button class="btn btn-warning" onmousedown="plus()" onmouseup="stoplus()"
+                    onmouseout="stoplus()">❯</button>
+                <button class="btn btn-warning font-weight-bolder  " onclick="newcolor()">？</button>
+                <button id="copy" type="button" class="btn btn-outline-warning">COPY</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        //rgb宣告
+        var rgb_r = Math.floor(Math.random() * 256),
+            rgb_g = Math.floor(Math.random() * 256),
+            rgb_b = Math.floor(Math.random() * 256);
+        var qq = rgb_r + "," + rgb_g + "," + rgb_b;
+        var r, g, b;
+        var fcol = document.getElementById("fontcolor");
+        fcol.style = `font-size: 4rem; text-align: center;line-height: 200px;`;
+        //range宣告
+        var oRan_r = document.getElementById("ran1"),
+            oRan_g = document.getElementById("ran2"),
+            oRan_b = document.getElementById("ran3");
+        var LookR=document.getElementById('LookR'),
+            LookG=document.getElementById('LookG'),
+            LookB=document.getElementById('LookB');
+        var oDiv = document.getElementById("col");
+        oDiv.style = `flex-basis: auto;margin-top:50px; height:200px;background-color:rgb(${qq})`;
+ 
+        oRan_r.value = rgb_r;
+        oRan_g.value = rgb_g;
+        oRan_b.value = rgb_b;
+        LookR.innerText=rgb_r;
+        LookG.innerText=rgb_g; 
+        LookB.innerText=rgb_b; 
+        //中間rgb碼轉16進位 例:#ffffff
+        function fontcolor(R, G, B) {
+            r = R.toString(16);
+            g = G.toString(16);
+            b = B.toString(16);
+            r = r.length < 2 ? "0" + r : r;
+            g = g.length < 2 ? "0" + g : g;
+            b = b.length < 2 ? '0' + b : b;
+            fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷         
+            return fcol.innerText = `#${r}${g}${b}`;
+        }
+        fontcolor(rgb_r, rgb_g, rgb_b);
+        //提示欄輸入顏色
+        function getnum(num) {
+            newnum = prompt("請輸人0~255的號碼", "");
+            if (num==1 && newnum >= 0 && newnum < 256) {
+                rgb_r=newnum;
+                oDiv.style.backgroundColor = `rgb(${rgb_r},${rgb_g},${rgb_b})`;
+                fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷   
+                oRan_r.value = newnum;
+
+                // LookR.innerText=rgb_r;                      
+            } 
+            else if (num==2 && newnum >= 0 && newnum < 256) {
+                rgb_g=newnum;
+                oDiv.style.backgroundColor = `rgb(${rgb_r},${rgb_g},${rgb_b})`;
+                fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷   
+                oRan_g.value = newnum;
+                // LookG.innerText=rgb_g;       
+            } 
+            else if (num==3 && newnum >= 0 && newnum < 256) {
+                rgb_b=newnum;
+                oDiv.style.backgroundColor = `rgb(${rgb_r},${rgb_g},${rgb_b})`;
+                fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷   
+                oRan_b.value = newnum;
+                // LookB.innerText=rgb_b;       
+            }     
+            else {
+                alert("輸入錯誤");
+                getnum(num);
+            }
+            R = parseInt(oRan_r.value, 10)//rang 將r字串轉10進位數字
+            G = parseInt(oRan_g.value, 10)//rang 將g字串轉10進位數字
+            B = parseInt(oRan_b.value, 10)//rang 將b字串轉10進位數字
+            fontcolor(R, G, B);//rgb碼轉16進位    
+        }
+        //input:range 拖曳條設置  
+        var time;
+        var arr = new Array;
+        function makecol(R, G, B) {
+            
+            
+            R = parseInt(oRan_r.value, 10)//rang 將r字串轉10進位數字
+            G = parseInt(oRan_g.value, 10)//rang 將g字串轉10進位數字
+            B = parseInt(oRan_b.value, 10)//rang 將b字串轉10進位數字
+            fontcolor(R, G, B);//rgb碼轉16進位 轉成#ffffff
+            oDiv.style.backgroundColor = `rgb(${oRan_r.value},${oRan_g.value},${oRan_b.value})`;            
+            rgb_r = R; //拖曳條數值傳至r
+            rgb_g = G; //拖曳條數值傳至g
+            rgb_b = B; //拖曳條數值傳至b
+         return fcol.style.color = `rgb(${255-oRan_r.value},${255-oRan_g.value},${255-oRan_b.value})`;//對比色判斷   
+        }
+       
+        //複制按鈕
+            const copy=document.getElementById('copy');
+            copy.addEventListener('click',function(){
+                const input=document.createElement('input');
+                document.body.appendChild(input);
+                input.setAttribute('value',` ${fontcolor(rgb_r, rgb_g, rgb_b)}`)
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+            });
+        //增加 按鈕效果
+        var time;
+        function plus() {      
+            time = setInterval(function () {
+                LookR.innerText=rgb_r;
+                LookG.innerText=rgb_g; 
+                LookB.innerText=rgb_b; 
+               
+                oDiv.style.backgroundColor = `rgb(${rgb_r ++},${rgb_g ++},${rgb_b ++})`;
+                if (rgb_r >= 255) rgb_r = 255;
+                if (rgb_g >= 255) rgb_g = 255;
+                if (rgb_b >= 255) rgb_b = 255;
+                oRan_r.value = rgb_r;
+                oRan_g.value = rgb_g;
+                oRan_b.value = rgb_b;
+                R = parseInt(oRan_r.value, 10)//rang 將r字串轉10進位數字
+                G = parseInt(oRan_g.value, 10)//rang 將g字串轉10進位數字
+                B = parseInt(oRan_b.value, 10)//rang 將b字串轉10進位數字
+                fontcolor(R, G, B);//rgb碼轉16進位
+            }, 10);
+        }
+        //減少 按鈕效果
+        function notplus() {
+            time = setInterval(function () {
+                LookR.innerText=rgb_r;
+                LookG.innerText=rgb_g; 
+                LookB.innerText=rgb_b; 
+                oDiv.style.backgroundColor = `rgb(${rgb_r --},${rgb_g --},${rgb_b --})`;
+                if (rgb_r <= 0) rgb_r = 0;
+                if (rgb_g <= 0) rgb_g = 0;
+                if (rgb_b <= 0) rgb_b = 0;
+                oRan_r.value = rgb_r;
+                oRan_g.value = rgb_g;
+                oRan_b.value = rgb_b;
+                R = parseInt(oRan_r.value, 10)//rang 將r字串轉10進位數字
+                G = parseInt(oRan_g.value, 10)//rang 將g字串轉10進位數字
+                B = parseInt(oRan_b.value, 10)//rang 將b字串轉10進位數字
+                fontcolor(R, G, B);//rgb碼轉16進位
+            }, 10);
+        }
+        //放開加減按鈕時
+        function stoplus() {
+            clearInterval(time);
+        }
+        //按問號鍵時
+        function newcolor() {
+            window.location.reload("");
+        }    
+    </script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
