@@ -80,7 +80,7 @@
         //提示欄輸入顏色
         function getnum(num) {
             newnum = prompt("請輸人0~255的號碼", "");
-            if (num==1 && newnum >= 0 && newnum < 256) {
+            if (num==1 && newnum >= 0 && newnum < 256 && newnum.length<4) {
                 rgb_r=newnum;
                 oDiv.style.backgroundColor = `rgb(${rgb_r},${rgb_g},${rgb_b})`;
                 fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷   
@@ -90,14 +90,14 @@
 
                 // LookR.innerText=rgb_r;                      
             } 
-            else if (num==2 && newnum >= 0 && newnum < 256) {
+            else if (num==2 && newnum >= 0 && newnum < 256 && newnum.length<4) {
                 rgb_g=newnum;
                 oDiv.style.backgroundColor = `rgb(${rgb_r},${rgb_g},${rgb_b})`;
                 fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷   
                 oRan_g.value = newnum;
                 LookG.innerText=rgb_g;       
             } 
-            else if (num==3 && newnum >= 0 && newnum < 256) {
+            else if (num==3 && newnum >= 0 && newnum < 256 && newnum.length<4) {
                 rgb_b=newnum;
                 oDiv.style.backgroundColor = `rgb(${rgb_r},${rgb_g},${rgb_b})`;
                 fcol.style.color = `rgb(${255-rgb_r},${255-rgb_g},${255-rgb_b})`;//對比色判斷   
